@@ -27,6 +27,11 @@ import LayersIcon from "@mui/icons-material/Layers";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import { pink } from "@mui/material/colors";
 import Radio from "@mui/material/Radio";
+import AddIcon from "@mui/icons-material/Add";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import LogoutIcon from "@mui/icons-material/Logout";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 import Popup from "reactjs-popup";
 
@@ -190,7 +195,7 @@ export default function Dashboard() {
                 trigger={
                   <ListItemButton>
                     <ListItemIcon>
-                      <DashboardIcon />
+                      <AddIcon />
                     </ListItemIcon>
                     <ListItemText primary="Add Habit" />
                   </ListItemButton>
@@ -218,7 +223,7 @@ export default function Dashboard() {
 
               <ListItemButton>
                 <ListItemIcon>
-                  <ShoppingCartIcon />
+                  <CheckBoxIcon />
                 </ListItemIcon>
                 <ListItemText primary="Daily Report" />
               </ListItemButton>
@@ -227,19 +232,19 @@ export default function Dashboard() {
             <React.Fragment>
               <ListItemButton>
                 <ListItemIcon>
-                  <AssignmentIcon />
+                  <AccountBoxIcon />
                 </ListItemIcon>
                 <ListItemText primary="Signed In As: Guest" />
               </ListItemButton>
               <ListItemButton>
                 <ListItemIcon>
-                  <AssignmentIcon />
+                  <PersonAddIcon />
                 </ListItemIcon>
                 <ListItemText primary="Sign In" />
               </ListItemButton>
               <ListItemButton>
                 <ListItemIcon>
-                  <AssignmentIcon />
+                  <LogoutIcon />
                 </ListItemIcon>
                 <ListItemText primary="Log Out" />
               </ListItemButton>
