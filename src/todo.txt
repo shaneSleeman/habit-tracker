@@ -1,5 +1,4 @@
-- report
 - date of completion
-- remove unused imports
 - turn green when complete and grey out
+- remove unused imports
 - better placeholders

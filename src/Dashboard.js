@@ -282,7 +282,14 @@ export default function Dashboard() {
                                 onClick={() => {
                                   const newHabits = habits.map((habit, i2) => {
                                     console.log(habit.name);
-                                    if (i == i2)
+                                    let difficultyDays;
+                                    if (habit.difficulty == "Easy")
+                                      difficultyDays = 18;
+                                    else if (habit.difficulty == "Medium")
+                                      difficultyDays = 66;
+                                    else difficultyDays = 254;
+
+                                    if (i == i2 && habit.daysRemain > 0) {
                                       return Habit(
                                         habit.id,
                                         habit.dateAdded,
@@ -291,7 +298,7 @@ export default function Dashboard() {
                                         parseInt(habit.daysComplete) + 1,
                                         habit.completed
                                       );
-                                    else
+                                    } else
                                       return Habit(
                                         habit.id,
                                         habit.dateAdded,
@@ -313,6 +320,39 @@ export default function Dashboard() {
                                 sx={{ marginTop: "5px", marginRight: "5px" }}
                                 variant="outlined"
                                 color="error"
+                                onClick={() => {
+                                  const newHabits = habits.map((habit, i2) => {
+                                    console.log(habit.name);
+                                    let difficultyDays;
+                                    if (habit.difficulty == "Easy")
+                                      difficultyDays = 18;
+                                    else if (habit.difficulty == "Medium")
+                                      difficultyDays = 66;
+                                    else difficultyDays = 254;
+
+                                    if (i == i2 && habit.daysComplete > 0) {
+                                      return Habit(
+                                        habit.id,
+                                        habit.dateAdded,
+                                        habit.name,
+                                        habit.difficulty,
+                                        parseInt(habit.daysComplete) - 2 < 0
+                                          ? 0
+                                          : parseInt(habit.daysComplete) - 2,
+                                        habit.completed
+                                      );
+                                    } else
+                                      return Habit(
+                                        habit.id,
+                                        habit.dateAdded,
+                                        habit.name,
+                                        habit.difficulty,
+                                        parseInt(habit.daysComplete),
+                                        habit.completed
+                                      );
+                                  });
+                                  setHabits(newHabits);
+                                }}
                               >
                                 Missed
                               </Button>
