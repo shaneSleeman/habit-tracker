@@ -25,6 +25,8 @@ import PeopleIcon from "@mui/icons-material/People";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import { pink } from "@mui/material/colors";
+import Radio from "@mui/material/Radio";
 
 import Popup from "reactjs-popup";
 
@@ -110,11 +112,11 @@ const mdTheme = createTheme();
 
 export default function Dashboard() {
   const [habits, setHabits] = React.useState([
-    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, "17 May, 2019"),
-    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, "17 May, 2019"),
-    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, "17 May, 2019"),
-    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, "17 May, 2019"),
-    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, "17 May, 2019"),
+    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, 40, "17 May, 2019"),
+    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, 40, "17 May, 2019"),
+    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, 40, "17 May, 2019"),
+    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, 40, "17 May, 2019"),
+    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, 40, "17 May, 2019"),
   ]);
   const [newHabit, setHabit] = React.useState("");
   const [open, setOpen] = React.useState(true);
@@ -193,39 +195,14 @@ export default function Dashboard() {
               >
                 <Card sx={{ minWidth: 275 }}>
                   <CardContent>
-                    <Typography
-                      sx={{ fontSize: 14 }}
-                      color="text.secondary"
-                      gutterBottom
-                    >
-                      Habit:
-                    </Typography>
-                    <Typography variant="h5" component="div">
-                      benevolent
-                    </Typography>
                     <TextField
                       id="standard-basic"
-                      label="Location"
+                      label="Habit"
                       variant="standard"
                       onChange={changeHabit}
                     />
-                    <Typography variant="body2">Difficulty:</Typography>
-                    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                      <Select
-                        labelId="demo-select-small"
-                        id="demo-select-small"
-                        //value={}
-                        label="Age"
-                        //onChange={}
-                      >
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={10}>Easy</MenuItem>
-                        <MenuItem value={20}>Medium</MenuItem>
-                        <MenuItem value={30}>Hard</MenuItem>
-                      </Select>
-                    </FormControl>
+                    <Typography variant="body2">Difficulty</Typography>
+                    <DifficultySelect />
                   </CardContent>
                   <CardActions>
                     <Button size="small" onClick={() => addHabit(newHabit)}>
@@ -292,5 +269,37 @@ export default function Dashboard() {
         </Box>
       </Box>
     </ThemeProvider>
+  );
+}
+
+function DifficultySelect() {
+  const [selectedValue, setSelectedValue] = React.useState("a");
+
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
+
+  const controlProps = (item) => ({
+    checked: selectedValue === item,
+    onChange: handleChange,
+    value: item,
+    name: "color-radio-button-demo",
+    inputProps: { "aria-label": item },
+  });
+
+  return (
+    <div>
+      <Radio {...controlProps("c")} color="success" />
+      <Radio {...controlProps("a")} />
+      <Radio
+        {...controlProps("e")}
+        sx={{
+          color: pink[800],
+          "&.Mui-checked": {
+            color: pink[600],
+          },
+        }}
+      />
+    </div>
   );
 }

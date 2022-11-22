@@ -1,5 +1,13 @@
-function Habit(id, dateAdded, name, difficulty, completion, completed) {
-  return { id, dateAdded, name, difficulty, completion, completed };
+function Habit(
+  id,
+  dateAdded,
+  name,
+  difficulty,
+  completion,
+  daysRemain,
+  completed
+) {
+  return { id, dateAdded, name, difficulty, completion, daysRemain, completed };
 }
 
 export default Habit;

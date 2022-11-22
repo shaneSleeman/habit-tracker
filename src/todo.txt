@@ -7,11 +7,10 @@
 - descriptions
 - remove habit
 - display difficulty as dot
+- remove unused imports
 
 functionality:
-- add a habit
+- add a habit//
 - the habit has a name, and 1 of 3 difficulties (extends days)
-- "daily report" to add or sub to habits
-- penalties for missing days
+- "daily report" to add or sub to habits, penalties for missing days
 - completed habits greyed and moved to bottom
-- graph displaying how well doing and actual days

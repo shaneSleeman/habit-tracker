@@ -26,6 +26,7 @@ export default function Habits({ habits }) {
             <TableCell>Habit</TableCell>
             <TableCell>Difficulty</TableCell>
             <TableCell>Completion</TableCell>
+            <TableCell>Remaining</TableCell>
             <TableCell align="right">Date Complete</TableCell>
           </TableRow>
         </TableHead>
@@ -38,6 +39,7 @@ export default function Habits({ habits }) {
               <TableCell>
                 <CircularProgressWithLabel value={habit.completion} />
               </TableCell>
+              <TableCell>{habit.daysRemain} Days</TableCell>
               <TableCell align="right">{habit.completed}</TableCell>
             </TableRow>
           ))}
