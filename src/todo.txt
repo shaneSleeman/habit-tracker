@@ -10,3 +10,4 @@ functionality:
 - "daily report" to add or sub to habits
 - penalties for missing days
 - completed habits greyed and moved to bottom
+- graph displaying how well doing and actual days

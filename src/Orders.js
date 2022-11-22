@@ -66,11 +66,11 @@ export default function Orders() {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell>Date Added</TableCell>
+            <TableCell>Habit</TableCell>
+            <TableCell>Difficulty</TableCell>
+            <TableCell>Completion</TableCell>
+            <TableCell align="right">Date Complete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -85,9 +85,6 @@ export default function Orders() {
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more orders
-      </Link>
     </React.Fragment>
   );
 }
