@@ -164,15 +164,24 @@ export default function Dashboard() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                flexWrap: "wrap",
+              }}
             >
-              Habit Tracker
-            </Typography>
+              <CheckBoxIcon />
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                sx={{ flexGrow: 1 }}
+              >
+                Habit Tracker
+              </Typography>
+            </div>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
