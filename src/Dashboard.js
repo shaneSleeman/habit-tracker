@@ -121,11 +121,9 @@ const mdTheme = createTheme();
 
 export default function Dashboard() {
   const [habits, setHabits] = React.useState([
-    Habit(0, "16 Mar, 2019", "habit1", "Easy", 9, "17 May, 2019"),
-    Habit(1, "16 Mar, 2019", "habit2", "Easy", 18, "17 May, 2019"),
-    Habit(2, "16 Mar, 2019", "habit3", "Hard", 200, "17 May, 2019"),
-    Habit(3, "16 Mar, 2019", "habit4", "Medium", 2, "17 May, 2019"),
-    Habit(4, "16 Mar, 2019", "habit5", "Hard", 40, "17 May, 2019"),
+    Habit(0, "10/11/22", "Exercise", "Medium", 9, "-"),
+    Habit(1, "22/11/22", "Read", "Hard", 18, "-"),
+    Habit(2, "01/11/22", "Walk", "Easy", 4, "-"),
   ]);
   const [newHabit, setHabit] = React.useState("");
   const [open, setOpen] = React.useState(true);
@@ -289,6 +287,14 @@ export default function Dashboard() {
                                       difficultyDays = 66;
                                     else difficultyDays = 254;
 
+                                    let date = new Date();
+                                    let day = date.getDate();
+                                    let month = date.getMonth();
+                                    let year = date.getFullYear();
+                                    let dateString =
+                                      day + "/" + (month + 1) + "/" + year;
+                                    if (habit.daysRemain > 1) dateString = "-";
+                                    console.log(habit.daysRemain);
                                     if (i == i2 && habit.daysRemain > 0) {
                                       return Habit(
                                         habit.id,
@@ -296,7 +302,7 @@ export default function Dashboard() {
                                         habit.name,
                                         habit.difficulty,
                                         parseInt(habit.daysComplete) + 1,
-                                        habit.completed
+                                        dateString
                                       );
                                     } else
                                       return Habit(
@@ -305,7 +311,7 @@ export default function Dashboard() {
                                         habit.name,
                                         habit.difficulty,
                                         parseInt(habit.daysComplete),
-                                        habit.completed
+                                        dateString
                                       );
                                   });
                                   setHabits(newHabits);
@@ -339,7 +345,7 @@ export default function Dashboard() {
                                         parseInt(habit.daysComplete) - 2 < 0
                                           ? 0
                                           : parseInt(habit.daysComplete) - 2,
-                                        habit.completed
+                                        "-"
                                       );
                                     } else
                                       return Habit(
@@ -348,7 +354,7 @@ export default function Dashboard() {
                                         habit.name,
                                         habit.difficulty,
                                         parseInt(habit.daysComplete),
-                                        habit.completed
+                                        "-"
                                       );
                                   });
                                   setHabits(newHabits);

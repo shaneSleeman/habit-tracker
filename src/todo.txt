@@ -1,4 +1,3 @@
-- date of completion
-- turn green when complete and grey out
-- remove unused imports
-- better placeholders
+- grey out when complete
+- remove unused imports and console logs
+- delegate bunch of functions
