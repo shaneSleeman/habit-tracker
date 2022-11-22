@@ -45,6 +45,7 @@ export default function Habits({ habits, deleteFunction }) {
                   backgroundColor: "lightpink",
                   cursor: "pointer",
                 },
+                backgroundColor: habit.daysRemain ? "white" : "lightgray",
               }}
               onClick={() => deleteFunction(i)}
             >

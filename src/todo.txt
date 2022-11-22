@@ -1,3 +1,4 @@
 - grey out when complete
 - remove unused imports and console logs
 - delegate bunch of functions
+- readme
