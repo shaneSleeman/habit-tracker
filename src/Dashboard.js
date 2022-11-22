@@ -51,7 +51,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { CheckBox } from "@mui/icons-material";
+import { CheckBox, SettingsSystemDaydreamSharp } from "@mui/icons-material";
 
 function Copyright(props) {
   return (
@@ -268,7 +268,7 @@ export default function Dashboard() {
                 <Card sx={{ minWidth: 275 }}>
                   <CardContent>
                     <Typography variant="p" component="h3">
-                      Which habits have you completed today?
+                      How well did you perform today?
                     </Typography>
                     <Typography variant="body2" component="h4">
                       Missed habits will be incurred a 2 day penalty.
@@ -276,17 +276,53 @@ export default function Dashboard() {
                     <FormGroup>
                       {habits.map((habit, i) => (
                         <FormControlLabel
-                          control={<Checkbox />}
+                          control={
+                            <>
+                              <Button
+                                onClick={() => {
+                                  const newHabits = habits.map((habit, i2) => {
+                                    console.log(habit.name);
+                                    if (i == i2)
+                                      return Habit(
+                                        habit.id,
+                                        habit.dateAdded,
+                                        habit.name,
+                                        habit.difficulty,
+                                        parseInt(habit.daysComplete) + 1,
+                                        habit.completed
+                                      );
+                                    else
+                                      return Habit(
+                                        habit.id,
+                                        habit.dateAdded,
+                                        habit.name,
+                                        habit.difficulty,
+                                        parseInt(habit.daysComplete),
+                                        habit.completed
+                                      );
+                                  });
+                                  setHabits(newHabits);
+                                }}
+                                sx={{ marginTop: "5px", marginRight: "5px" }}
+                                variant="outlined"
+                                color="success"
+                              >
+                                Completed
+                              </Button>
+                              <Button
+                                sx={{ marginTop: "5px", marginRight: "5px" }}
+                                variant="outlined"
+                                color="error"
+                              >
+                                Missed
+                              </Button>
+                            </>
+                          }
                           label={habit.name}
                         />
                       ))}
                     </FormGroup>
                   </CardContent>
-                  <CardActions>
-                    <Button size="small" onClick={() => addHabit(newHabit)}>
-                      Update
-                    </Button>
-                  </CardActions>
                 </Card>
               </Popup>
             </React.Fragment>

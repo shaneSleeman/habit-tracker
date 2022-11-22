@@ -1,4 +1,5 @@
-- report, penalties
+- report
 - date of completion
 - remove unused imports
 - turn green when complete and grey out
+- better placeholders
