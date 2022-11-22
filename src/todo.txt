@@ -1,7 +1,4 @@
-- submit difficulty
-- temporarily local storage?
 - report, penalties
-- color theme
 - date of completion
 - remove unused imports
 - turn green when complete and grey out

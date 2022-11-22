@@ -153,7 +153,9 @@ export default function Dashboard() {
       0,
       "-"
     );
-    setHabits((habits) => [...habits, newHabitObject]);
+    if (newHabit != "" && selectedDifficulty != "") {
+      setHabits((habits) => [...habits, newHabitObject]);
+    }
   }
 
   const deleteHabit = (i) => {
@@ -341,7 +343,8 @@ export default function Dashboard() {
 }
 
 function DifficultySelect({ updateSelectFunction }) {
-  const [selectedValue, setSelectedValue] = React.useState("Easy");
+  const [selectedValue, setSelectedValue] = React.useState("");
+  //updateSelectFunction("");
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
