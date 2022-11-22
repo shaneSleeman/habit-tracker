@@ -15,7 +15,7 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function Habits({ habits }) {
+export default function Habits({ habits, deleteFunction }) {
   return (
     <React.Fragment>
       <Title>Habits</Title>
@@ -31,8 +31,17 @@ export default function Habits({ habits }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {habits.map((habit) => (
-            <TableRow key={habit.id}>
+          {habits.map((habit, i) => (
+            <TableRow
+              key={habit.id}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "lightpink",
+                  cursor: "pointer",
+                },
+              }}
+              onClick={() => deleteFunction(i)}
+            >
               <TableCell>{habit.dateAdded}</TableCell>
               <TableCell>{habit.name}</TableCell>
               <TableCell>{habit.difficulty}</TableCell>

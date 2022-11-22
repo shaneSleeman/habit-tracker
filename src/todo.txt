@@ -1,4 +1,4 @@
-- favicon
+- favicon and tab title
 - icon next to title
 - temporarily local storage?
 - color theme

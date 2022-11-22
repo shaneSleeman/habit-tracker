@@ -112,11 +112,11 @@ const mdTheme = createTheme();
 
 export default function Dashboard() {
   const [habits, setHabits] = React.useState([
-    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, 40, "17 May, 2019"),
-    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, 40, "17 May, 2019"),
-    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, 40, "17 May, 2019"),
-    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, 40, "17 May, 2019"),
-    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, 40, "17 May, 2019"),
+    Habit(0, "16 Mar, 2019", "habit1", "Hard", 62, 40, "17 May, 2019"),
+    Habit(1, "16 Mar, 2019", "habit2", "Hard", 62, 40, "17 May, 2019"),
+    Habit(2, "16 Mar, 2019", "habit3", "Hard", 62, 40, "17 May, 2019"),
+    Habit(3, "16 Mar, 2019", "habit4", "Hard", 62, 40, "17 May, 2019"),
+    Habit(4, "16 Mar, 2019", "habit5", "Hard", 62, 40, "17 May, 2019"),
   ]);
   const [newHabit, setHabit] = React.useState("");
   const [open, setOpen] = React.useState(true);
@@ -132,6 +132,10 @@ export default function Dashboard() {
     let newHabitObject = Habit(0, "test", newHabit, "test", 12, "test");
     setHabits((habits) => [...habits, newHabitObject]);
   }
+
+  const deleteHabit = (i) => {
+    setHabits((habits) => habits.filter((habit, n) => n !== i));
+  };
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -260,7 +264,7 @@ export default function Dashboard() {
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <Habits habits={habits} />
+                  <Habits habits={habits} deleteFunction={deleteHabit} />
                 </Paper>
               </Grid>
             </Grid>
