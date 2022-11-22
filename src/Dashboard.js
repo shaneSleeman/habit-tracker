@@ -25,7 +25,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import { pink } from "@mui/material/colors";
+import { green, orange, pink, red } from "@mui/material/colors";
 import Radio from "@mui/material/Radio";
 import AddIcon from "@mui/icons-material/Add";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
@@ -42,12 +42,16 @@ import {
   Card,
   CardActions,
   CardContent,
+  Checkbox,
   FormControl,
+  FormControlLabel,
+  FormGroup,
   InputLabel,
   MenuItem,
   Select,
   TextField,
 } from "@mui/material";
+import { CheckBox } from "@mui/icons-material";
 
 function Copyright(props) {
   return (
@@ -139,7 +143,7 @@ export default function Dashboard() {
     let month = date.getMonth();
     let year = date.getFullYear();
     let dateString = day + "/" + (month + 1) + "/" + year;
-    let newHabitObject = Habit(0, dateString, newHabit, "test", 12, "test");
+    let newHabitObject = Habit(0, dateString, newHabit, "Easy", 0, "-");
     setHabits((habits) => [...habits, newHabitObject]);
   }
 
@@ -224,7 +228,9 @@ export default function Dashboard() {
                       variant="standard"
                       onChange={changeHabit}
                     />
-                    <Typography variant="body2">Difficulty</Typography>
+                    <Typography variant="body2" sx={{ marginTop: "10px" }}>
+                      Difficulty
+                    </Typography>
                     <DifficultySelect />
                   </CardContent>
                   <CardActions>
@@ -234,13 +240,41 @@ export default function Dashboard() {
                   </CardActions>
                 </Card>
               </Popup>
-
-              <ListItemButton>
-                <ListItemIcon>
-                  <CheckBoxIcon />
-                </ListItemIcon>
-                <ListItemText primary="Daily Report" />
-              </ListItemButton>
+              <Popup
+                trigger={
+                  <ListItemButton>
+                    <ListItemIcon>
+                      <CheckBoxIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Daily Report" />
+                  </ListItemButton>
+                }
+                position="right top"
+              >
+                <Card sx={{ minWidth: 275 }}>
+                  <CardContent>
+                    <Typography variant="p" component="h3">
+                      Which habits have you completed today?
+                    </Typography>
+                    <Typography variant="body2" component="h4">
+                      Missed habits will be incurred a 2 day penalty.
+                    </Typography>
+                    <FormGroup>
+                      {habits.map((habit, i) => (
+                        <FormControlLabel
+                          control={<Checkbox />}
+                          label={habit.name}
+                        />
+                      ))}
+                    </FormGroup>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small" onClick={() => addHabit(newHabit)}>
+                      Update
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Popup>
             </React.Fragment>
             <Divider sx={{ my: 1 }} />
             <React.Fragment>
@@ -295,7 +329,7 @@ export default function Dashboard() {
   );
 }
 
-function DifficultySelect() {
+function DifficultySelect({ updateSelectFunction }) {
   const [selectedValue, setSelectedValue] = React.useState("a");
 
   const handleChange = (event) => {
@@ -312,14 +346,30 @@ function DifficultySelect() {
 
   return (
     <div>
-      <Radio {...controlProps("c")} color="success" />
-      <Radio {...controlProps("a")} />
       <Radio
-        {...controlProps("e")}
+        {...controlProps("a")}
         sx={{
-          color: pink[800],
+          color: green[800],
           "&.Mui-checked": {
-            color: pink[600],
+            color: green[600],
+          },
+        }}
+      />
+      <Radio
+        {...controlProps("b")}
+        sx={{
+          color: orange[800],
+          "&.Mui-checked": {
+            color: orange[600],
+          },
+        }}
+      />
+      <Radio
+        {...controlProps("c")}
+        sx={{
+          color: red[800],
+          "&.Mui-checked": {
+            color: red[600],
           },
         }}
       />

@@ -1,7 +1,9 @@
+- submit difficulty
+- popup layouts
 - temporarily local storage?
 - report, penalties
 - color theme
-- dates add and complete
+- date of completion
 - display difficulty as dot
 - remove unused imports
 - turn green when complete and grey out
