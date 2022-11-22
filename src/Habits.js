@@ -6,6 +6,8 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Title from "./Title";
+import { CircularProgress, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 
 // Generate Order Data
 
@@ -33,12 +35,38 @@ export default function Habits({ habits }) {
               <TableCell>{habit.dateAdded}</TableCell>
               <TableCell>{habit.name}</TableCell>
               <TableCell>{habit.difficulty}</TableCell>
-              <TableCell>{habit.completion}</TableCell>
+              <TableCell>
+                <CircularProgressWithLabel value={habit.completion} />
+              </TableCell>
               <TableCell align="right">{habit.completed}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </React.Fragment>
+  );
+}
+
+function CircularProgressWithLabel(props) {
+  return (
+    <Box sx={{ position: "relative", display: "inline-flex" }}>
+      <CircularProgress variant="determinate" {...props} />
+      <Box
+        sx={{
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          position: "absolute",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Typography variant="caption" component="div" color="text.secondary">
+          {`${Math.round(props.value)}%`}
+        </Typography>
+      </Box>
+    </Box>
   );
 }

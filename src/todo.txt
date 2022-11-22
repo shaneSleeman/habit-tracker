@@ -5,6 +5,8 @@
 - 18,66,254
 - colour for difficulty
 - descriptions
+- remove habit
+- display difficulty as dot
 
 functionality:
 - add a habit

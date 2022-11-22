@@ -30,14 +30,17 @@ import Popup from "reactjs-popup";
 
 import Habits from "./Habits";
 import Habit from "./Habit";
-
-let habits = [
-  Habit(0, "16 Mar, 2019", "Exercise", "Hard", "62%", "17 May, 2019"),
-  Habit(0, "16 Mar, 2019", "Exercise", "Hard", "62%", "17 May, 2019"),
-  Habit(0, "16 Mar, 2019", "Exercise", "Hard", "62%", "17 May, 2019"),
-  Habit(0, "16 Mar, 2019", "Exercise", "Hard", "62%", "17 May, 2019"),
-  Habit(0, "16 Mar, 2019", "Exercise", "Hard", "62%", "17 May, 2019"),
-];
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 
 function Copyright(props) {
   return (
@@ -105,11 +108,28 @@ const Drawer = styled(MuiDrawer, {
 
 const mdTheme = createTheme();
 
-function DashboardContent() {
+export default function Dashboard() {
+  const [habits, setHabits] = React.useState([
+    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, "17 May, 2019"),
+    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, "17 May, 2019"),
+    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, "17 May, 2019"),
+    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, "17 May, 2019"),
+    Habit(0, "16 Mar, 2019", "Exercise", "Hard", 62, "17 May, 2019"),
+  ]);
+  const [newHabit, setHabit] = React.useState("");
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  function changeHabit(event) {
+    setHabit(event.target.value);
+  }
+
+  function addHabit(newHabit) {
+    let newHabitObject = Habit(0, "test", newHabit, "test", 12, "test");
+    setHabits((habits) => [...habits, newHabitObject]);
+  }
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -159,9 +179,90 @@ function DashboardContent() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            <React.Fragment>
+              <Popup
+                trigger={
+                  <ListItemButton>
+                    <ListItemIcon>
+                      <DashboardIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Add Habit" />
+                  </ListItemButton>
+                }
+                position="right top"
+              >
+                <Card sx={{ minWidth: 275 }}>
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 14 }}
+                      color="text.secondary"
+                      gutterBottom
+                    >
+                      Habit:
+                    </Typography>
+                    <Typography variant="h5" component="div">
+                      benevolent
+                    </Typography>
+                    <TextField
+                      id="standard-basic"
+                      label="Location"
+                      variant="standard"
+                      onChange={changeHabit}
+                    />
+                    <Typography variant="body2">Difficulty:</Typography>
+                    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                      <Select
+                        labelId="demo-select-small"
+                        id="demo-select-small"
+                        //value={}
+                        label="Age"
+                        //onChange={}
+                      >
+                        <MenuItem value="">
+                          <em>None</em>
+                        </MenuItem>
+                        <MenuItem value={10}>Easy</MenuItem>
+                        <MenuItem value={20}>Medium</MenuItem>
+                        <MenuItem value={30}>Hard</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small" onClick={() => addHabit(newHabit)}>
+                      Add
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Popup>
+
+              <ListItemButton>
+                <ListItemIcon>
+                  <ShoppingCartIcon />
+                </ListItemIcon>
+                <ListItemText primary="Daily Report" />
+              </ListItemButton>
+            </React.Fragment>
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+            <React.Fragment>
+              <ListItemButton>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Signed In As: Guest" />
+              </ListItemButton>
+              <ListItemButton>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Sign In" />
+              </ListItemButton>
+              <ListItemButton>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Log Out" />
+              </ListItemButton>
+            </React.Fragment>
           </List>
         </Drawer>
         <Box
@@ -193,47 +294,3 @@ function DashboardContent() {
     </ThemeProvider>
   );
 }
-
-export default function Dashboard() {
-  return <DashboardContent />;
-}
-
-export const mainListItems = (
-  <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Add Habit" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Daily Report" />
-    </ListItemButton>
-  </React.Fragment>
-);
-
-export const secondaryListItems = (
-  <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Signed In As: Guest" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Sign In" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Log Out" />
-    </ListItemButton>
-  </React.Fragment>
-);
