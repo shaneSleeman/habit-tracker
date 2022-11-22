@@ -15,6 +15,12 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
+function returnColor(difficulty) {
+  if (difficulty == "Easy") return "green";
+  else if (difficulty == "Medium") return "orange";
+  else return "red";
+}
+
 export default function Habits({ habits, deleteFunction }) {
   return (
     <React.Fragment>
@@ -44,7 +50,9 @@ export default function Habits({ habits, deleteFunction }) {
             >
               <TableCell>{habit.dateAdded}</TableCell>
               <TableCell>{habit.name}</TableCell>
-              <TableCell>{habit.difficulty}</TableCell>
+              <TableCell sx={{ color: `${returnColor(habit.difficulty)}` }}>
+                {habit.difficulty}
+              </TableCell>
               <TableCell>
                 <CircularProgressWithLabel value={habit.completion} />
               </TableCell>
