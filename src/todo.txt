@@ -1,7 +1,7 @@
 - temporarily local storage?
 - report, penalties
 - color theme
-- colour for difficulty
+- dates add and complete
 - display difficulty as dot
 - remove unused imports
 - turn green when complete and grey out

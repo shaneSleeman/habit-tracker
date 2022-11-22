@@ -134,7 +134,12 @@ export default function Dashboard() {
   }
 
   function addHabit(newHabit) {
-    let newHabitObject = Habit(0, "test", newHabit, "test", 12, "test");
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+    let dateString = day + "/" + (month + 1) + "/" + year;
+    let newHabitObject = Habit(0, dateString, newHabit, "test", 12, "test");
     setHabits((habits) => [...habits, newHabitObject]);
   }
 
