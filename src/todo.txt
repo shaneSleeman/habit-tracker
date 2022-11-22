@@ -3,6 +3,8 @@
 - temporarily local storage?
 - color theme
 - 18,66,254
+- colour for difficulty
+- descriptions
 
 functionality:
 - add a habit

@@ -16,7 +16,7 @@ import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { mainListItems, secondaryListItems } from "./listitems";
-import Orders from "./Orders";
+import Habits from "./Habits";
 
 function Copyright(props) {
   return (
@@ -161,7 +161,7 @@ function DashboardContent() {
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <Orders />
+                  <Habits />
                 </Paper>
               </Grid>
             </Grid>
