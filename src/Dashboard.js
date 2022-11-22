@@ -156,6 +156,7 @@ export default function Dashboard() {
     if (newHabit != "" && selectedDifficulty != "") {
       setHabits((habits) => [...habits, newHabitObject]);
     }
+    setHabit("");
   }
 
   const deleteHabit = (i) => {
