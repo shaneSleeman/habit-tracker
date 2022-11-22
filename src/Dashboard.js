@@ -16,7 +16,17 @@ import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { mainListItems, secondaryListItems } from "./listitems";
+
 import Habits from "./Habits";
+import Habit from "./Habit";
+
+let habits = [
+  Habit(0, "16 Mar, 2019", "Exercise", "Hard", "62%", "17 May, 2019"),
+  Habit(0, "16 Mar, 2019", "Exercise", "Hard", "62%", "17 May, 2019"),
+  Habit(0, "16 Mar, 2019", "Exercise", "Hard", "62%", "17 May, 2019"),
+  Habit(0, "16 Mar, 2019", "Exercise", "Hard", "62%", "17 May, 2019"),
+  Habit(0, "16 Mar, 2019", "Exercise", "Hard", "62%", "17 May, 2019"),
+];
 
 function Copyright(props) {
   return (
@@ -161,7 +171,7 @@ function DashboardContent() {
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <Habits />
+                  <Habits habits={habits} />
                 </Paper>
               </Grid>
             </Grid>

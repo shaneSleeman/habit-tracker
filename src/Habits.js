@@ -8,23 +8,12 @@ import TableRow from "@mui/material/TableRow";
 import Title from "./Title";
 
 // Generate Order Data
-function createData(id, dateAdded, name, difficulty, completion, completed) {
-  return { id, dateAdded, name, difficulty, completion, completed };
-}
-
-const rows = [
-  createData(0, "16 Mar, 2019", "Exercise", "Hard", "62%", "17 May, 2019"),
-  createData(0, "16 Mar, 2019", "Exercise", "Hard", "62%", "17 May, 2019"),
-  createData(0, "16 Mar, 2019", "Exercise", "Hard", "62%", "17 May, 2019"),
-  createData(0, "16 Mar, 2019", "Exercise", "Hard", "62%", "17 May, 2019"),
-  createData(0, "16 Mar, 2019", "Exercise", "Hard", "62%", "17 May, 2019"),
-];
 
 function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function Habits() {
+export default function Habits({ habits }) {
   return (
     <React.Fragment>
       <Title>Habits</Title>
@@ -39,13 +28,13 @@ export default function Habits() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.dateAdded}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.difficulty}</TableCell>
-              <TableCell>{row.completion}</TableCell>
-              <TableCell align="right">{row.completed}</TableCell>
+          {habits.map((habit) => (
+            <TableRow key={habit.id}>
+              <TableCell>{habit.dateAdded}</TableCell>
+              <TableCell>{habit.name}</TableCell>
+              <TableCell>{habit.difficulty}</TableCell>
+              <TableCell>{habit.completion}</TableCell>
+              <TableCell align="right">{habit.completed}</TableCell>
             </TableRow>
           ))}
         </TableBody>
