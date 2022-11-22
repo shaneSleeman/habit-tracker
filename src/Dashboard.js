@@ -133,6 +133,8 @@ export default function Dashboard() {
     setOpen(!open);
   };
 
+  const [selectedDifficulty, setSelectedDifficulty] = React.useState("Easy");
+
   function changeHabit(event) {
     setHabit(event.target.value);
   }
@@ -143,7 +145,14 @@ export default function Dashboard() {
     let month = date.getMonth();
     let year = date.getFullYear();
     let dateString = day + "/" + (month + 1) + "/" + year;
-    let newHabitObject = Habit(0, dateString, newHabit, "Easy", 0, "-");
+    let newHabitObject = Habit(
+      0,
+      dateString,
+      newHabit,
+      selectedDifficulty,
+      0,
+      "-"
+    );
     setHabits((habits) => [...habits, newHabitObject]);
   }
 
@@ -231,7 +240,9 @@ export default function Dashboard() {
                     <Typography variant="body2" sx={{ marginTop: "10px" }}>
                       Difficulty
                     </Typography>
-                    <DifficultySelect />
+                    <DifficultySelect
+                      updateSelectFunction={setSelectedDifficulty}
+                    />
                   </CardContent>
                   <CardActions>
                     <Button size="small" onClick={() => addHabit(newHabit)}>
@@ -330,10 +341,11 @@ export default function Dashboard() {
 }
 
 function DifficultySelect({ updateSelectFunction }) {
-  const [selectedValue, setSelectedValue] = React.useState("a");
+  const [selectedValue, setSelectedValue] = React.useState("Easy");
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
+    updateSelectFunction(event.target.value);
   };
 
   const controlProps = (item) => ({
@@ -347,7 +359,7 @@ function DifficultySelect({ updateSelectFunction }) {
   return (
     <div>
       <Radio
-        {...controlProps("a")}
+        {...controlProps("Easy")}
         sx={{
           color: green[800],
           "&.Mui-checked": {
@@ -356,7 +368,7 @@ function DifficultySelect({ updateSelectFunction }) {
         }}
       />
       <Radio
-        {...controlProps("b")}
+        {...controlProps("Medium")}
         sx={{
           color: orange[800],
           "&.Mui-checked": {
@@ -365,7 +377,7 @@ function DifficultySelect({ updateSelectFunction }) {
         }}
       />
       <Radio
-        {...controlProps("c")}
+        {...controlProps("Hard")}
         sx={{
           color: red[800],
           "&.Mui-checked": {
