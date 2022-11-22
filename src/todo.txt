@@ -1,0 +1,12 @@
+- favicon
+- icon next to title
+- temporarily local storage?
+- color theme
+- 18,66,254
+
+functionality:
+- add a habit
+- the habit has a name, and 1 of 3 difficulties (extends days)
+- "daily report" to add or sub to habits
+- penalties for missing days
+- completed habits greyed and moved to bottom
