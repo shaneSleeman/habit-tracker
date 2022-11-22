@@ -112,11 +112,11 @@ const mdTheme = createTheme();
 
 export default function Dashboard() {
   const [habits, setHabits] = React.useState([
-    Habit(0, "16 Mar, 2019", "habit1", "Hard", 62, 40, "17 May, 2019"),
-    Habit(1, "16 Mar, 2019", "habit2", "Hard", 62, 40, "17 May, 2019"),
-    Habit(2, "16 Mar, 2019", "habit3", "Hard", 62, 40, "17 May, 2019"),
-    Habit(3, "16 Mar, 2019", "habit4", "Hard", 62, 40, "17 May, 2019"),
-    Habit(4, "16 Mar, 2019", "habit5", "Hard", 62, 40, "17 May, 2019"),
+    Habit(0, "16 Mar, 2019", "habit1", "Easy", 9, "17 May, 2019"),
+    Habit(1, "16 Mar, 2019", "habit2", "Easy", 18, "17 May, 2019"),
+    Habit(2, "16 Mar, 2019", "habit3", "Hard", 200, "17 May, 2019"),
+    Habit(3, "16 Mar, 2019", "habit4", "Hard", 2, "17 May, 2019"),
+    Habit(4, "16 Mar, 2019", "habit5", "Hard", 40, "17 May, 2019"),
   ]);
   const [newHabit, setHabit] = React.useState("");
   const [open, setOpen] = React.useState(true);
