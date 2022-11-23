@@ -7,6 +7,8 @@
 - fully deploy on firebase or something?
 - remove database or other?
 - change to production
+- hide password dots
 
-data flow
-- every change, save the current 
+problems
+- need to have only 1 document per collection
+- fetchdata not being called correctly

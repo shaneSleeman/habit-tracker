@@ -124,11 +124,7 @@ const Drawer = styled(MuiDrawer, {
 const mdTheme = createTheme();
 
 export default function Dashboard() {
-  const [habits, setHabits] = React.useState([
-    Habit(0, "10/11/2022", "Exercise", "Medium", 9, "-"),
-    Habit(1, "22/11/2022", "Read", "Hard", 18, "-"),
-    Habit(2, "01/11/2022", "Walk", "Easy", 4, "-"),
-  ]);
+  const [habits, setHabits] = React.useState([]);
   const [newHabit, setHabit] = React.useState("");
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
@@ -519,6 +515,7 @@ export default function Dashboard() {
                       id="standard-basic"
                       label="Password"
                       variant="standard"
+                      type="password"
                       onChange={(e) => setPassword(e.target.value)}
                     />
                     <Typography
@@ -560,6 +557,7 @@ export default function Dashboard() {
                     <TextField
                       id="standard-basic"
                       label="Password"
+                      type="password"
                       variant="standard"
                       onChange={(e) => setPassword(e.target.value)}
                     />
