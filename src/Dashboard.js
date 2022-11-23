@@ -32,6 +32,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { signOut } from "firebase/auth";
+import { storage } from "./firebase";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 
 import Popup from "reactjs-popup";
 
@@ -127,6 +129,9 @@ export default function Dashboard() {
 
   const [userName, setUserName] = React.useState("Guest");
 
+  const [signinError, setSigninError] = React.useState("");
+  const [signupError, setSignupError] = React.useState("");
+
   // Update any change with the database
   const updateDatabase = () => {};
 
@@ -160,12 +165,14 @@ export default function Dashboard() {
 
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        setSignupError("");
         // Signed in
         const user = userCredential.user;
         console.log(user);
         // ...
       })
       .catch((error) => {
+        setSignupError("Invalid email, weak password, or user exists.");
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
@@ -178,12 +185,15 @@ export default function Dashboard() {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        setSigninError("");
         // Signed in
         const user = userCredential.user;
         console.log(user);
         userName = email;
       })
       .catch((error) => {
+        if (!error.message.includes("constant"))
+          setSigninError("User does not exist, or wrong password.");
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
@@ -462,31 +472,36 @@ export default function Dashboard() {
                 }
                 position="right top"
               >
-                <div>
-                  <label htmlFor="email-address">Email address</label>
-                  <input
-                    type="email"
-                    label="Email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    placeholder="Email address"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="password">Password</label>
-                  <input
-                    type="password"
-                    label="Create password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    placeholder="Password"
-                  />
-                </div>{" "}
-                <button type="submit" onClick={onLogin}>
-                  Sign up
-                </button>
+                <Card sx={{ minWidth: 275 }}>
+                  <CardContent>
+                    <TextField
+                      id="standard-basic"
+                      label="Email"
+                      variant="standard"
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </CardContent>
+                  <CardContent sx={{ marginTop: "-20px" }}>
+                    <TextField
+                      id="standard-basic"
+                      label="Password"
+                      variant="standard"
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <Typography
+                      variant="body2"
+                      color="red"
+                      sx={{ marginTop: "10px" }}
+                    >
+                      {signinError}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small" onClick={onLogin}>
+                      Sign In
+                    </Button>
+                  </CardActions>
+                </Card>
               </Popup>
               <Popup
                 trigger={
@@ -499,31 +514,36 @@ export default function Dashboard() {
                 }
                 position="right top"
               >
-                <div>
-                  <label htmlFor="email-address">Email address</label>
-                  <input
-                    type="email"
-                    label="Email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    placeholder="Email address"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="password">Password</label>
-                  <input
-                    type="password"
-                    label="Create password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    placeholder="Password"
-                  />
-                </div>{" "}
-                <button type="submit" onClick={onSubmit}>
-                  Sign up
-                </button>
+                <Card sx={{ minWidth: 275 }}>
+                  <CardContent>
+                    <TextField
+                      id="standard-basic"
+                      label="Email"
+                      variant="standard"
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </CardContent>
+                  <CardContent sx={{ marginTop: "-20px" }}>
+                    <TextField
+                      id="standard-basic"
+                      label="Password"
+                      variant="standard"
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <Typography
+                      variant="body2"
+                      color="red"
+                      sx={{ marginTop: "10px" }}
+                    >
+                      {signupError}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small" onClick={onSubmit}>
+                      Sign Up
+                    </Button>
+                  </CardActions>
+                </Card>
               </Popup>
 
               <ListItemButton onClick={handleLogout}>

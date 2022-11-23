@@ -6,9 +6,11 @@
 - readme
 - explanatory
 - fully deploy on firebase or something?
+- remove database or other?
 
 authentication
 - shrink username to before @
-- popup styles
-- successful signup notification then direct to signin
-- ACTUALLY access data lol
+- successful signup notification then direct to signin, fail notif's too
+
+data flow
+- every change, save the current 
