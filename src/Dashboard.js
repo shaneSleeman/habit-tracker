@@ -32,7 +32,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { signOut } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
 
 import Popup from "reactjs-popup";
@@ -154,6 +154,18 @@ export default function Dashboard() {
     }
   };
 
+  // Fetch data for user
+  const fetchUser = async () => {
+    await getDocs(collection(db, `${userName}`)).then((querySnapshot) => {
+      const newData = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setHabits(newData);
+      console.log(habits);
+    });
+  };
+
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -170,6 +182,7 @@ export default function Dashboard() {
       }
     });
     if (window.innerWidth < 760) setOpen(false);
+    fetchUser();
   }, []);
 
   const [selectedDifficulty, setSelectedDifficulty] = React.useState("Easy");
