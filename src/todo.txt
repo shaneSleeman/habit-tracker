@@ -7,10 +7,10 @@
 - explanatory
 - fully deploy on firebase or something?
 - remove database or other?
+- change to production
 
 authentication
 - shrink username to before @
-- successful signup notification then direct to signin, fail notif's too
 
 data flow
 - every change, save the current 

@@ -67,6 +67,14 @@ function Copyright(props) {
   );
 }
 
+function excludeAt(s) {
+  let newS = "";
+  for (let i = 0; i < s.length; i++) {
+    if (s.charAt(i) != "@") newS += s.charAt(i);
+    else return newS;
+  }
+}
+
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -459,7 +467,7 @@ export default function Dashboard() {
                 <ListItemIcon>
                   <AccountBoxIcon />
                 </ListItemIcon>
-                <ListItemText primary={userName} />
+                <ListItemText primary={excludeAt(userName)} />
               </ListItemButton>
               <Popup
                 trigger={
