@@ -18,7 +18,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { green, orange, pink, red } from "@mui/material/colors";
+import { green, orange, red } from "@mui/material/colors";
 import Radio from "@mui/material/Radio";
 import AddIcon from "@mui/icons-material/Add";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
@@ -31,6 +31,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { signOut } from "firebase/auth";
 
 import Popup from "reactjs-popup";
 
@@ -126,6 +127,9 @@ export default function Dashboard() {
 
   const [userName, setUserName] = React.useState("Guest");
 
+  // Update any change with the database
+  const updateDatabase = () => {};
+
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -186,6 +190,19 @@ export default function Dashboard() {
       });
   };
 
+  // Logout function
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        console.log("Signed out successfully");
+        setUserName("Guest");
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
+
   // Add habit to state
   function addHabit(newHabit) {
     let date = new Date();
@@ -203,12 +220,14 @@ export default function Dashboard() {
     );
     if (newHabit != "" && selectedDifficulty != "") {
       setHabits((habits) => [...habits, newHabitObject]);
+      updateDatabase();
     }
     setHabit("");
   }
 
   const deleteHabit = (i) => {
     setHabits((habits) => habits.filter((habit, n) => n !== i));
+    updateDatabase();
   };
 
   return (
@@ -365,6 +384,7 @@ export default function Dashboard() {
                                       );
                                   });
                                   setHabits(newHabits);
+                                  updateDatabase();
                                 }}
                                 sx={{ marginTop: "5px", marginRight: "5px" }}
                                 variant="outlined"
@@ -408,6 +428,7 @@ export default function Dashboard() {
                                       );
                                   });
                                   setHabits(newHabits);
+                                  updateDatabase();
                                 }}
                               >
                                 Missed
@@ -505,7 +526,7 @@ export default function Dashboard() {
                 </button>
               </Popup>
 
-              <ListItemButton>
+              <ListItemButton onClick={handleLogout}>
                 <ListItemIcon>
                   <LogoutIcon />
                 </ListItemIcon>

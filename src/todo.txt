@@ -1,15 +1,14 @@
-- localstorage for guest
 - sidebar auto close when shrink!!
 - demo account email suggestion
 - remove unused imports and console logs
+- remove unecessary comments
 - delegate bunch of functions
 - readme
-- firebase authentication
 - explanatory
+- fully deploy on firebase or something?
 
 authentication
-- display currently signed in
+- shrink username to before @
 - popup styles
 - successful signup notification then direct to signin
 - ACTUALLY access data lol
-- logout
