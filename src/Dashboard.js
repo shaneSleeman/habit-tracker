@@ -157,12 +157,11 @@ export default function Dashboard() {
   // Fetch data for user
   const fetchUser = async () => {
     await getDocs(collection(db, `${userName}`)).then((querySnapshot) => {
-      const newData = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setHabits(newData);
-      console.log(habits);
+      querySnapshot.forEach((doc) => {
+        console.log(doc.data().habits);
+        // Close
+        setHabits(doc.data().habits);
+      });
     });
   };
 
