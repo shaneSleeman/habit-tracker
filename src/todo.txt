@@ -1,4 +1,5 @@
-- grey out when complete
+- localstorage for guest
 - remove unused imports and console logs
 - delegate bunch of functions
 - readme
+- firebase authentication
