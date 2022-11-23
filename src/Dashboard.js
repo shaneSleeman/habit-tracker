@@ -154,7 +154,7 @@ export default function Dashboard() {
       } else {
         // User is signed out
         // ...
-        userName = "Guest";
+        userName = "Guest@";
       }
     });
   }, []);
@@ -214,7 +214,7 @@ export default function Dashboard() {
       .then(() => {
         // Sign-out successful.
         console.log("Signed out successfully");
-        setUserName("Guest");
+        setUserName("Guest@");
       })
       .catch((error) => {
         // An error happened.

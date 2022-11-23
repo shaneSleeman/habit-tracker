@@ -9,8 +9,5 @@
 - remove database or other?
 - change to production
 
-authentication
-- shrink username to before @
-
 data flow
 - every change, save the current 
