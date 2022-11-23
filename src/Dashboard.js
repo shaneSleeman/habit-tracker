@@ -32,8 +32,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { signOut } from "firebase/auth";
-import { storage } from "./firebase";
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "./firebase";
 
 import Popup from "reactjs-popup";
 
@@ -125,9 +125,9 @@ const mdTheme = createTheme();
 
 export default function Dashboard() {
   const [habits, setHabits] = React.useState([
-    Habit(0, "10/11/22", "Exercise", "Medium", 9, "-"),
-    Habit(1, "22/11/22", "Read", "Hard", 18, "-"),
-    Habit(2, "01/11/22", "Walk", "Easy", 4, "-"),
+    Habit(0, "10/11/2022", "Exercise", "Medium", 9, "-"),
+    Habit(1, "22/11/2022", "Read", "Hard", 18, "-"),
+    Habit(2, "01/11/2022", "Walk", "Easy", 4, "-"),
   ]);
   const [newHabit, setHabit] = React.useState("");
   const [open, setOpen] = React.useState(true);
@@ -140,8 +140,19 @@ export default function Dashboard() {
   const [signinError, setSigninError] = React.useState("");
   const [signupError, setSignupError] = React.useState("");
 
+  const [currentUser, setCurrentUser] = React.useState();
+
   // Update any change with the database
-  const updateDatabase = () => {};
+  const updateDatabase = async () => {
+    try {
+      const docRef = await addDoc(collection(db, "todos"), {
+        habits: habits,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
 
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -150,6 +161,7 @@ export default function Dashboard() {
         // https://firebase.google.com/docs/reference/js/firebase.User
         console.log(user.email);
         setUserName(user.email);
+        setCurrentUser(user);
         // ...
       } else {
         // User is signed out
