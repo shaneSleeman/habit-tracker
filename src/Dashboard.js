@@ -179,9 +179,9 @@ export default function Dashboard() {
         // ...
         userName = "Guest@";
       }
+      fetchUser();
     });
     if (window.innerWidth < 760) setOpen(false);
-    fetchUser();
   }, []);
 
   const [selectedDifficulty, setSelectedDifficulty] = React.useState("Easy");
