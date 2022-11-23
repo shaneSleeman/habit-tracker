@@ -25,6 +25,10 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import CreateIcon from "@mui/icons-material/Create";
+
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "./firebase";
 
 import Popup from "reactjs-popup";
 
@@ -124,6 +128,28 @@ export default function Dashboard() {
     setHabit(event.target.value);
   }
 
+  // Email and password
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        // ..
+      });
+  };
+
+  // Add habit to state
   function addHabit(newHabit) {
     let date = new Date();
     let day = date.getDate();
@@ -365,7 +391,7 @@ export default function Dashboard() {
                 <ListItemIcon>
                   <AccountBoxIcon />
                 </ListItemIcon>
-                <ListItemText primary="Signed In As: Guest" />
+                <ListItemText primary="Guest" />
               </ListItemButton>
               <ListItemButton>
                 <ListItemIcon>
@@ -373,6 +399,44 @@ export default function Dashboard() {
                 </ListItemIcon>
                 <ListItemText primary="Sign In" />
               </ListItemButton>
+              <Popup
+                trigger={
+                  <ListItemButton>
+                    <ListItemIcon>
+                      <CreateIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Sign Up" />
+                  </ListItemButton>
+                }
+                position="right top"
+              >
+                <div>
+                  <label htmlFor="email-address">Email address</label>
+                  <input
+                    type="email"
+                    label="Email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    placeholder="Email address"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    label="Create password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    placeholder="Password"
+                  />
+                </div>{" "}
+                <button type="submit" onClick={onSubmit}>
+                  Sign up
+                </button>
+              </Popup>
+
               <ListItemButton>
                 <ListItemIcon>
                   <LogoutIcon />
