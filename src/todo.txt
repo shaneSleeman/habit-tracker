@@ -1,5 +1,8 @@
 - localstorage for guest
+- sidebar auto close when shrink!!
+- demo account email suggestion
 - remove unused imports and console logs
 - delegate bunch of functions
 - readme
 - firebase authentication
+- explanatory
