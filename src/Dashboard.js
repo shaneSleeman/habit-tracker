@@ -145,7 +145,7 @@ export default function Dashboard() {
   // Update any change with the database
   const updateDatabase = async () => {
     try {
-      const docRef = await addDoc(collection(db, "todos"), {
+      const docRef = await addDoc(collection(db, `${userName}`), {
         habits: habits,
       });
       console.log("Document written with ID: ", docRef.id);
