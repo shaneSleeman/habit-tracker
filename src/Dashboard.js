@@ -30,6 +30,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 import Popup from "reactjs-popup";
 
@@ -123,6 +124,24 @@ export default function Dashboard() {
     setOpen(!open);
   };
 
+  const [userName, setUserName] = React.useState("Guest");
+
+  React.useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        console.log(user.email);
+        setUserName(user.email);
+        // ...
+      } else {
+        // User is signed out
+        // ...
+        userName = "Guest";
+      }
+    });
+  }, []);
+
   const [selectedDifficulty, setSelectedDifficulty] = React.useState("Easy");
 
   function changeHabit(event) {
@@ -158,6 +177,7 @@ export default function Dashboard() {
         // Signed in
         const user = userCredential.user;
         console.log(user);
+        userName = email;
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -408,7 +428,7 @@ export default function Dashboard() {
                 <ListItemIcon>
                   <AccountBoxIcon />
                 </ListItemIcon>
-                <ListItemText primary="Guest" />
+                <ListItemText primary={userName} />
               </ListItemButton>
               <Popup
                 trigger={

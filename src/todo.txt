@@ -6,3 +6,10 @@
 - readme
 - firebase authentication
 - explanatory
+
+authentication
+- display currently signed in
+- popup styles
+- successful signup notification then direct to signin
+- ACTUALLY access data lol
+- logout
