@@ -141,10 +141,13 @@ export default function Dashboard() {
   // Update any change with the database
   const updateDatabase = async () => {
     try {
+      let thisDate = new Date().getTime();
       const docRef = await addDoc(collection(db, `${userName}`), {
         habits: habits,
+        date: thisDate,
       });
       console.log("Document written with ID: ", docRef.id);
+      console.log("doc written with date", thisDate);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -153,11 +156,21 @@ export default function Dashboard() {
   // Fetch data for user
   const fetchUser = async () => {
     await getDocs(collection(db, `${userName}`)).then((querySnapshot) => {
+      let latestDate = 0;
+      let latestData;
       querySnapshot.forEach((doc) => {
+        console.log("got here");
+        if (doc.data().date > latestDate) {
+          latestDate = doc.data().date;
+          latestData = doc.data().habits;
+        }
+        console.log(doc.data().date);
         console.log(doc.data().habits);
         // Close
-        setHabits(doc.data().habits);
+        //setHabits(doc.data().habits);
       });
+      console.log(latestData);
+      setHabits(latestData);
     });
   };
 
