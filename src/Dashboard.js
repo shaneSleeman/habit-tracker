@@ -138,6 +138,7 @@ export default function Dashboard() {
 
   // Update any change with the database
   const updateDatabase = async () => {
+    console.log("did update first");
     try {
       let thisDate = new Date().getTime();
       const docRef = await addDoc(collection(db, `${userName}`), {
@@ -280,6 +281,7 @@ export default function Dashboard() {
       "-"
     );
     if (newHabit != "" && selectedDifficulty != "") {
+      console.log("setHabits first");
       setHabits((habits) => [...habits, newHabitObject]);
       updateDatabase();
     }
