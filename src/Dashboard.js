@@ -131,12 +131,10 @@ export default function Dashboard() {
     setOpen(!open);
   };
 
-  const [userName, setUserName] = React.useState("Guest");
+  const [userName, setUserName] = React.useState("Guest@");
 
   const [signinError, setSigninError] = React.useState("");
   const [signupError, setSignupError] = React.useState("");
-
-  const [currentUser, setCurrentUser] = React.useState();
 
   // Update any change with the database
   const updateDatabase = async () => {
@@ -159,14 +157,16 @@ export default function Dashboard() {
     let latestData;
     await getDocs(collection(db, `${userName}`)).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
+        console.log("got here1");
         if (doc.data().date > latestDate) {
-          console.log("got here");
+          console.log("got here2");
           latestDate = doc.data().date;
           latestData = doc.data().habits;
           console.log(doc.data().date);
           console.log(doc.data().habits);
-          setHabits(latestData);
           //setHabits(latestData);
+          //setHabits(latestData);
+          setHabits(latestData);
         }
 
         // Close
@@ -181,17 +181,17 @@ export default function Dashboard() {
 
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
+      console.log(user.email);
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         console.log(user.email);
         setUserName(user.email);
-        setCurrentUser(user);
         // ...
       } else {
         // User is signed out
         // ...
-        userName = "Guest@";
+        setUserName("Guest@");
       }
       fetchUser();
     });

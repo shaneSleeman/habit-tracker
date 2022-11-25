@@ -9,6 +9,7 @@
 - change to production
 - hide password dots
 - first user needs default submission
+- 1 doc per user
 
 problems
 - consider deleting past's, probably unecessary
