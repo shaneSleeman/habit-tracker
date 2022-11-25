@@ -155,6 +155,9 @@ export default function Dashboard() {
   const fetchUser = async () => {
     let latestDate = 0;
     let latestData;
+    console.log(userName);
+    //console.log(db);
+    //console.log(userName);
     await getDocs(collection(db, `${userName}`)).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         console.log("got here1");
@@ -162,8 +165,8 @@ export default function Dashboard() {
           console.log("got here2");
           latestDate = doc.data().date;
           latestData = doc.data().habits;
-          console.log(doc.data().date);
-          console.log(doc.data().habits);
+          //console.log(doc.data().date);
+          //console.log(doc.data().habits);
           //setHabits(latestData);
           //setHabits(latestData);
           setHabits(latestData);
@@ -181,7 +184,8 @@ export default function Dashboard() {
 
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      console.log(user.email);
+      //console.log(user.email);
+
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
