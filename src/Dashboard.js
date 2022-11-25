@@ -155,22 +155,27 @@ export default function Dashboard() {
 
   // Fetch data for user
   const fetchUser = async () => {
+    let latestDate = 0;
+    let latestData;
     await getDocs(collection(db, `${userName}`)).then((querySnapshot) => {
-      let latestDate = 0;
-      let latestData;
       querySnapshot.forEach((doc) => {
-        console.log("got here");
         if (doc.data().date > latestDate) {
+          console.log("got here");
           latestDate = doc.data().date;
           latestData = doc.data().habits;
+          console.log(doc.data().date);
+          console.log(doc.data().habits);
+          setHabits(latestData);
+          //setHabits(latestData);
         }
-        console.log(doc.data().date);
-        console.log(doc.data().habits);
+
         // Close
         //setHabits(doc.data().habits);
       });
+
       console.log(latestData);
-      setHabits(latestData);
+
+      // Location of cut-paste working!!
     });
   };
 

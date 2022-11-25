@@ -8,7 +8,9 @@
 - remove database or other?
 - change to production
 - hide password dots
+- first user needs default submission
 
 problems
-- need to have only 1 document per collection
-- fetchdata not being called correctly
+- consider deleting past's, probably unecessary
+- fetchdata not being called correctly, asynchronous issues...
+- fix deletes
