@@ -48,6 +48,7 @@ import {
 
 import Copyright from "./Copyright";
 import DifficultySelect from "./DifficultySelect";
+import AppBarTitle from "./AppBarTitle";
 
 // Shortens username display
 function excludeAt(s) {
@@ -243,6 +244,8 @@ export default function Dashboard() {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
+        <AppBarTitle toggleFunction={(toggleDrawer, open)} />
+        {/*
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
@@ -281,6 +284,7 @@ export default function Dashboard() {
             </div>
           </Toolbar>
         </AppBar>
+            */}
         <Drawer variant="permanent" open={open}>
           <Toolbar
             sx={{
@@ -582,54 +586,3 @@ export default function Dashboard() {
     </ThemeProvider>
   );
 }
-
-/*
-function DifficultySelect({ updateSelectFunction }) {
-  const [selectedValue, setSelectedValue] = React.useState("");
-
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-    updateSelectFunction(event.target.value);
-  };
-
-  const controlProps = (item) => ({
-    checked: selectedValue === item,
-    onChange: handleChange,
-    value: item,
-    name: "color-radio-button-demo",
-    inputProps: { "aria-label": item },
-  });
-
-  return (
-    <div>
-      <Radio
-        {...controlProps("Easy")}
-        sx={{
-          color: green[800],
-          "&.Mui-checked": {
-            color: green[600],
-          },
-        }}
-      />
-      <Radio
-        {...controlProps("Medium")}
-        sx={{
-          color: orange[800],
-          "&.Mui-checked": {
-            color: orange[600],
-          },
-        }}
-      />
-      <Radio
-        {...controlProps("Hard")}
-        sx={{
-          color: red[800],
-          "&.Mui-checked": {
-            color: red[600],
-          },
-        }}
-      />
-    </div>
-  );
-}
-*/
