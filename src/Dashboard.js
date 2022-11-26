@@ -302,7 +302,8 @@ export default function Dashboard() {
 
   const deleteHabit = (i) => {
     setHabits((habits) => habits.filter((habit, n) => n !== i));
-    updateDatabase();
+    //change2
+    updateDatabase(habits.filter((habit, n) => n !== i));
   };
 
   return (
