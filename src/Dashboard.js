@@ -115,7 +115,6 @@ export default function Dashboard() {
     setOpen(!open);
   };
   const [userName, setUserName] = React.useState("Guest@");
-  const [signinError, setSigninError] = React.useState("");
   const [signupError, setSignupError] = React.useState("");
   const [selectedDifficulty, setSelectedDifficulty] = React.useState("Easy");
   const [email, setEmail] = React.useState("");
@@ -188,13 +187,9 @@ export default function Dashboard() {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        setSigninError("");
         userName = email;
       })
-      .catch((error) => {
-        if (!error.message.includes("constant"))
-          setSigninError("User does not exist, or wrong password.");
-      });
+      .catch((error) => {});
   };
 
   // Logout function
@@ -482,13 +477,6 @@ export default function Dashboard() {
                       type="password"
                       onChange={(e) => setPassword(e.target.value)}
                     />
-                    <Typography
-                      variant="body2"
-                      color="red"
-                      sx={{ marginTop: "10px" }}
-                    >
-                      {signinError}
-                    </Typography>
                   </CardContent>
                   <CardActions>
                     <Button size="small" onClick={onLogin}>
