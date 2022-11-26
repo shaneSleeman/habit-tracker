@@ -12,14 +12,11 @@ import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { green, orange, red } from "@mui/material/colors";
-import Radio from "@mui/material/Radio";
 import AddIcon from "@mui/icons-material/Add";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -49,24 +46,10 @@ import {
   TextField,
 } from "@mui/material";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://github.com/shaneSleeman">
-        Shane Sleeman's Github
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import Copyright from "./Copyright";
+import DifficultySelect from "./DifficultySelect";
 
+// Shortens username display
 function excludeAt(s) {
   let newS = "";
   for (let i = 0; i < s.length; i++) {
@@ -77,6 +60,7 @@ function excludeAt(s) {
 
 const drawerWidth = 240;
 
+// Styling and theming from MUI
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -130,13 +114,14 @@ export default function Dashboard() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-
   const [userName, setUserName] = React.useState("Guest@");
-
   const [signinError, setSigninError] = React.useState("");
   const [signupError, setSignupError] = React.useState("");
+  const [selectedDifficulty, setSelectedDifficulty] = React.useState("Easy");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
-  // Update any change with the database
+  // Update any change with the database, once newHabits is fed
   const updateDatabase = async (newHabits) => {
     try {
       let thisDate = new Date().getTime();
@@ -147,7 +132,7 @@ export default function Dashboard() {
     } catch (e) {}
   };
 
-  // Fetch data for user, note input
+  // Fetch data for user, once newUser is fed
   const fetchUser = async (newUser) => {
     let latestDate = 0;
     let latestData;
@@ -164,6 +149,7 @@ export default function Dashboard() {
   };
 
   React.useEffect(() => {
+    // Set data with signed in user
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUserName(user.email);
@@ -173,18 +159,17 @@ export default function Dashboard() {
         fetchUser("Guest@");
       }
     });
+
+    // If loaded with small screen width, have smaller sidebar
     if (window.innerWidth < 760) setOpen(false);
   }, []);
 
-  const [selectedDifficulty, setSelectedDifficulty] = React.useState("Easy");
-
+  // Update name of habit whenever field changes
   function changeHabit(event) {
     setHabit(event.target.value);
   }
 
   // Signup function
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -248,6 +233,7 @@ export default function Dashboard() {
     setHabit("");
   }
 
+  // Remove habit from state
   const deleteHabit = (i) => {
     setHabits((habits) => habits.filter((habit, n) => n !== i));
     updateDatabase(habits.filter((habit, n) => n !== i));
@@ -597,6 +583,7 @@ export default function Dashboard() {
   );
 }
 
+/*
 function DifficultySelect({ updateSelectFunction }) {
   const [selectedValue, setSelectedValue] = React.useState("");
 
@@ -645,3 +632,4 @@ function DifficultySelect({ updateSelectFunction }) {
     </div>
   );
 }
+*/
