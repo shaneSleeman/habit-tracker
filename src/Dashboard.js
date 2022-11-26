@@ -281,7 +281,7 @@ export default function Dashboard() {
       "-"
     );
     if (newHabit != "" && selectedDifficulty != "") {
-      console.log("setHabits first");
+      console.log("setHabits");
       setHabits((habits) => [...habits, newHabitObject]);
       updateDatabase();
     }
