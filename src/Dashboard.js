@@ -138,99 +138,40 @@ export default function Dashboard() {
 
   // Update any change with the database
   const updateDatabase = async (newHabits) => {
-    /*change1
-    try {
-      let thisDate = new Date().getTime();
-      const docRef = await addDoc(collection(db, `${userName}`), {
-        habits: habits,
-        date: thisDate,
-      });
-      console.log("Document written with ID: ", docRef.id);
-      console.log("doc written with date", thisDate);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }*/
     try {
       let thisDate = new Date().getTime();
       const docRef = await addDoc(collection(db, `${userName}`), {
         habits: newHabits,
         date: thisDate,
       });
-      console.log("Document written with ID: ", docRef.id);
-      console.log("doc written with date", thisDate);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
+    } catch (e) {}
   };
 
-  // Fetch data for user
+  // Fetch data for user, note input
   const fetchUser = async (newUser) => {
     let latestDate = 0;
     let latestData;
-    //console.log(userName);
-    //console.log(db);
-    //console.log(userName);
-    /*
-    await getDocs(collection(db, `${userName}`)).then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        console.log("got here1");
-        if (doc.data().date > latestDate) {
-          console.log("got here2");
-          latestDate = doc.data().date;
-          latestData = doc.data().habits;
-          //console.log(doc.data().date);
-          //console.log(doc.data().habits);
-          //setHabits(latestData);
-          //setHabits(latestData);
-          setHabits(latestData);
-        }
 
-        // Close
-        //setHabits(doc.data().habits);
-      });*/
     await getDocs(collection(db, `${newUser}`)).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        console.log("got here1");
         if (doc.data().date > latestDate) {
-          console.log("got here2");
           latestDate = doc.data().date;
           latestData = doc.data().habits;
-          //console.log(doc.data().date);
-          //console.log(doc.data().habits);
-          //setHabits(latestData);
-          //setHabits(latestData);
           setHabits(latestData);
         }
-
-        // Close
-        //setHabits(doc.data().habits);
       });
-
-      console.log(latestData);
-
-      // Location of cut-paste working!!
     });
   };
 
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      //console.log(user.email);
-
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        console.log(user.email);
         setUserName(user.email);
         fetchUser(user.email);
-        // ...
       } else {
-        // User is signed out
-        // ...
         setUserName("Guest@");
-        //change4
         fetchUser("Guest@");
       }
-      //fetchUser(userName);
     });
     if (window.innerWidth < 760) setOpen(false);
   }, []);
@@ -250,17 +191,12 @@ export default function Dashboard() {
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setSignupError("");
-        // Signed in
         const user = userCredential.user;
-        console.log(user);
-        // ...
       })
       .catch((error) => {
         setSignupError("Invalid email, weak password, or user exists.");
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        // ..
       });
   };
 
@@ -270,9 +206,7 @@ export default function Dashboard() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setSigninError("");
-        // Signed in
         const user = userCredential.user;
-        console.log(user);
         userName = email;
       })
       .catch((error) => {
@@ -280,7 +214,6 @@ export default function Dashboard() {
           setSigninError("User does not exist, or wrong password.");
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
       });
   };
 
@@ -289,7 +222,6 @@ export default function Dashboard() {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        console.log("Signed out successfully");
         setUserName("Guest@");
       })
       .catch((error) => {
@@ -313,7 +245,6 @@ export default function Dashboard() {
       "-"
     );
     if (newHabit != "" && selectedDifficulty != "") {
-      console.log("setHabits");
       setHabits((habits) => [...habits, newHabitObject]);
       //updateDatabase(); change1
       updateDatabase([...habits, newHabitObject]);
@@ -445,7 +376,6 @@ export default function Dashboard() {
                               <Button
                                 onClick={() => {
                                   const newHabits = habits.map((habit, i2) => {
-                                    console.log(habit.name);
                                     let difficultyDays;
                                     if (habit.difficulty == "Easy")
                                       difficultyDays = 18;
@@ -460,7 +390,6 @@ export default function Dashboard() {
                                     let dateString =
                                       day + "/" + (month + 1) + "/" + year;
                                     if (habit.daysRemain > 1) dateString = "-";
-                                    console.log(habit.daysRemain);
                                     if (i == i2 && habit.daysRemain > 0) {
                                       return Habit(
                                         habit.id,
@@ -495,7 +424,6 @@ export default function Dashboard() {
                                 color="error"
                                 onClick={() => {
                                   const newHabits = habits.map((habit, i2) => {
-                                    console.log(habit.name);
                                     let difficultyDays;
                                     if (habit.difficulty == "Easy")
                                       difficultyDays = 18;
