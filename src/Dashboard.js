@@ -164,13 +164,31 @@ export default function Dashboard() {
   };
 
   // Fetch data for user
-  const fetchUser = async () => {
+  const fetchUser = async (newUser) => {
     let latestDate = 0;
     let latestData;
-    console.log(userName);
+    //console.log(userName);
     //console.log(db);
     //console.log(userName);
+    /*
     await getDocs(collection(db, `${userName}`)).then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        console.log("got here1");
+        if (doc.data().date > latestDate) {
+          console.log("got here2");
+          latestDate = doc.data().date;
+          latestData = doc.data().habits;
+          //console.log(doc.data().date);
+          //console.log(doc.data().habits);
+          //setHabits(latestData);
+          //setHabits(latestData);
+          setHabits(latestData);
+        }
+
+        // Close
+        //setHabits(doc.data().habits);
+      });*/
+    await getDocs(collection(db, `${newUser}`)).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         console.log("got here1");
         if (doc.data().date > latestDate) {
@@ -203,13 +221,16 @@ export default function Dashboard() {
         // https://firebase.google.com/docs/reference/js/firebase.User
         console.log(user.email);
         setUserName(user.email);
+        fetchUser(user.email);
         // ...
       } else {
         // User is signed out
         // ...
         setUserName("Guest@");
+        //change4
+        fetchUser("Guest@");
       }
-      fetchUser();
+      //fetchUser(userName);
     });
     if (window.innerWidth < 760) setOpen(false);
   }, []);
