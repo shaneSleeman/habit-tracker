@@ -5,7 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Title from "./Title";
-import { CircularProgress, Typography } from "@mui/material";
+import { Card, CircularProgress, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
 // Generate Order Data
@@ -22,7 +22,7 @@ function returnColor(difficulty) {
 
 export default function Habits({ habits, deleteFunction }) {
   return (
-    <React.Fragment>
+    <Paper sx={{ width: 1, overflow: "auto" }}>
       <Title>Habits</Title>
       <Table size="small">
         <TableHead>
@@ -62,7 +62,7 @@ export default function Habits({ habits, deleteFunction }) {
           ))}
         </TableBody>
       </Table>
-    </React.Fragment>
+    </Paper>
   );
 }
 
