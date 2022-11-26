@@ -137,12 +137,23 @@ export default function Dashboard() {
   const [signupError, setSignupError] = React.useState("");
 
   // Update any change with the database
-  const updateDatabase = async () => {
-    console.log("did update first");
+  const updateDatabase = async (newHabits) => {
+    /*change1
     try {
       let thisDate = new Date().getTime();
       const docRef = await addDoc(collection(db, `${userName}`), {
         habits: habits,
+        date: thisDate,
+      });
+      console.log("Document written with ID: ", docRef.id);
+      console.log("doc written with date", thisDate);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }*/
+    try {
+      let thisDate = new Date().getTime();
+      const docRef = await addDoc(collection(db, `${userName}`), {
+        habits: newHabits,
         date: thisDate,
       });
       console.log("Document written with ID: ", docRef.id);
@@ -283,7 +294,8 @@ export default function Dashboard() {
     if (newHabit != "" && selectedDifficulty != "") {
       console.log("setHabits");
       setHabits((habits) => [...habits, newHabitObject]);
-      updateDatabase();
+      //updateDatabase(); change1
+      updateDatabase([...habits, newHabitObject]);
     }
     setHabit("");
   }
