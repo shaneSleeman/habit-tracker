@@ -460,7 +460,7 @@ export default function Dashboard() {
                                       );
                                   });
                                   setHabits(newHabits);
-                                  updateDatabase();
+                                  updateDatabase(newHabits);
                                 }}
                                 sx={{ marginTop: "5px", marginRight: "5px" }}
                                 variant="outlined"
@@ -504,7 +504,7 @@ export default function Dashboard() {
                                       );
                                   });
                                   setHabits(newHabits);
-                                  updateDatabase();
+                                  updateDatabase(newHabits);
                                 }}
                               >
                                 Missed
