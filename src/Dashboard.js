@@ -48,7 +48,6 @@ import {
 
 import Copyright from "./Copyright";
 import DifficultySelect from "./DifficultySelect";
-import AppBarTitle from "./AppBarTitle";
 
 // Shortens username display
 function excludeAt(s) {
@@ -244,8 +243,7 @@ export default function Dashboard() {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBarTitle toggleFunction={(toggleDrawer, open)} />
-        {/*
+
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
@@ -284,7 +282,7 @@ export default function Dashboard() {
             </div>
           </Toolbar>
         </AppBar>
-            */}
+
         <Drawer variant="permanent" open={open}>
           <Toolbar
             sx={{
