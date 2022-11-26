@@ -176,12 +176,9 @@ export default function Dashboard() {
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setSignupError("");
-        const user = userCredential.user;
       })
       .catch((error) => {
         setSignupError("Invalid email, weak password, or user exists.");
-        const errorCode = error.code;
-        const errorMessage = error.message;
       });
   };
 
@@ -191,14 +188,11 @@ export default function Dashboard() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setSigninError("");
-        const user = userCredential.user;
         userName = email;
       })
       .catch((error) => {
         if (!error.message.includes("constant"))
           setSigninError("User does not exist, or wrong password.");
-        const errorCode = error.code;
-        const errorMessage = error.message;
       });
   };
 
