@@ -221,12 +221,9 @@ export default function Dashboard() {
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
         setUserName("Guest@");
       })
-      .catch((error) => {
-        // An error happened.
-      });
+      .catch((error) => {});
   };
 
   // Add habit to state
@@ -246,7 +243,6 @@ export default function Dashboard() {
     );
     if (newHabit != "" && selectedDifficulty != "") {
       setHabits((habits) => [...habits, newHabitObject]);
-      //updateDatabase(); change1
       updateDatabase([...habits, newHabitObject]);
     }
     setHabit("");
@@ -254,7 +250,6 @@ export default function Dashboard() {
 
   const deleteHabit = (i) => {
     setHabits((habits) => habits.filter((habit, n) => n !== i));
-    //change2
     updateDatabase(habits.filter((habit, n) => n !== i));
   };
 
@@ -587,7 +582,7 @@ export default function Dashboard() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Recent Orders */}
+              {}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
                   <Habits habits={habits} deleteFunction={deleteHabit} />
@@ -604,7 +599,6 @@ export default function Dashboard() {
 
 function DifficultySelect({ updateSelectFunction }) {
   const [selectedValue, setSelectedValue] = React.useState("");
-  //updateSelectFunction("");
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);

@@ -11,14 +11,7 @@ function Habit(id, dateAdded, name, difficulty, daysComplete, completed) {
     completion = (daysComplete / 254) * 100;
     daysRemain = 254 - daysComplete;
   }
-  /*
-  function addDay() {
-    daysComplete++;
-  }
-  function removeDay() {
-    daysComplete -= 2;
-    if (daysComplete < 0) daysComplete = 0;
-  }*/
+
   return {
     id,
     dateAdded,
