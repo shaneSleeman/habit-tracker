@@ -175,11 +175,13 @@ export default function Dashboard() {
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setSignupError("");
-        window.location.reload(false);
+        
       })
       .catch((error) => {
         setSignupError("Invalid email, weak password, or user exists.");
       });
+    
+    window.location.reload(false);
   };
 
   // Signin function
